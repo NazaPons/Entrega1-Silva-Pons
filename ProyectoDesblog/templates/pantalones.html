@@ -3,6 +3,35 @@
 {% load static %}
 
 
+
 {% block contenido %}
-<h1>Catálogo de Pantalones</h1>
+  <h1> Catálogo de Pantalones </h1>
+  <br>
+  <h2>Cargue aquí sus productos - Pantalones</h2>
+  <div class="contenidoPantalones">
+    <form class="formDataPantalones" action="/ProyectoDesblog/pantalones" method="POST"> {% csrf_token %}
+        <input type="text" name="color" placeholder="Color">
+        <input type="text" name="talle" placeholder="Talle">
+        <input type="text" name="marca" placeholder="Marca">
+        <button type="submit" class="btn btn-primary btndj">Cargar</button>
+    </form>
+  </div>
+  <div>
+    <form class="formDataPantalones" action="/ProyectoDesblog/buscar_pantalon/" method="GET">
+        <input type="text" name="marca" placeholder="Marca">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+  </div>
+  <div>
+    {% if pantalones %}
+    <ul>
+        {% for pantalon in pantalones %}
+        <li>{{pantalon.color}}</li>
+        <li>{{pantalon.talle}}</li>
+        <li>{{pantalon.marca}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
 {% endblock %}

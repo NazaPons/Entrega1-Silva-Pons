@@ -4,5 +4,32 @@
 
 
 {% block contenido %}
-<h1>Catálogo de Buzos</h1>
+  <h1> Catálogo de Buzos </h1>
+  <br>
+  <h2>Cargue aquí sus productos - Buzos</h2>
+  <div class="contenidoBuzos">
+    <form class="formDataBuzos" action="/ProyectoDesblog/buzos/" method="POST"> {% csrf_token %}
+        <input type="text" name="color" placeholder="Color">
+        <input type="text" name="talle" placeholder="Talle">
+        <input type="text" name="marca" placeholder="Marca">
+        <button type="submit" class="btn btn-primary btndj">Cargar</button>
+    </form>
+  </div>
+  <div>
+    <form class="formDataBuzos" action="/ProyectoDesblog/buscar_buzo/" method="GET">
+        <input type="text" name="marca" placeholder="Marca">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+  </div>
+  <div>
+    {% if buzos %}
+    <ul>
+        {% for buzo in buzos %}
+        <li>{{buzo.color}}</li>
+        <li>{{buzo.talle}}</li>
+        <li>{{buzo.marca}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
 {% endblock %}

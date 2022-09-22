@@ -3,6 +3,36 @@
 {% load static %}
 
 
+
+
 {% block contenido %}
-<h1>Catálogo de Remeras</h1>
+  <h1> Catálogo de Remeras </h1>
+  <br>
+  <h2>Cargue aquí sus productos - Remeras</h2>
+  <div class="contenidoRemeras">
+    <form class="formDataRemeras" action="/ProyectoDesblog/remeras" method="POST"> {% csrf_token %}
+        <input type="text" name="color" placeholder="Color">
+        <input type="text" name="talle" placeholder="Talle">
+        <input type="text" name="marca" placeholder="Marca">
+        <button type="submit" class="btn btn-primary btndj">Cargar</button>
+    </form>
+  </div>
+  <div>
+    <form class="formDataRemeras" action="/ProyectoDesblog/buscar_remeras/" method="GET">
+        <input type="text" name="marca" placeholder="Marca">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+  </div>
+  <div>
+    {% if remeras %}
+    <ul>
+        {% for remera in remeras %}
+        <li>{{remera.color}}</li>
+        <li>{{remera.talle}}</li>
+        <li>{{remera.marca}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  
 {% endblock %}
