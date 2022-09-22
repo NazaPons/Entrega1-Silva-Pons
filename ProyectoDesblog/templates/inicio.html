@@ -18,24 +18,53 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/ProyectoDesblog/">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'Inicio' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://127.0.0.1:8000/ProyectoDesblog/buzos">Buzos</a>
+            <a class="nav-link" href="{% url 'Buzos' %}">Buzos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://127.0.0.1:8000/ProyectoDesblog/pantalones">Pantalones</a>
+            <a class="nav-link" href="{% url 'Pantalones' %}">Pantalones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://127.0.0.1:8000/ProyectoDesblog/remeras">Remeras</a>
+            <a class="nav-link" href="{% url 'Remeras' %}">Remeras</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
+  
+  
   {% block contenido %}
-    <h1> Bienvenido a Inicio </h1>
+  <h1> Bienvenido a Inicio </h1>
+  <br>
+  <h2>Regístrese</h2>
+  <div class="contenidoUsuarios">
+    <form class="formDataUsuarios" action="/ProyectoDesblog/" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="apellido" placeholder="Apellido">
+        <input type="email" name="email" placeholder="Email">
+        <button type="submit" class="btn btn-primary btndj">Registrar</button>
+    </form>
+  </div>
+  <div>
+    <form class="formDataUsuarios" action="/ProyectoDesblog/buscar_usuario/" method="GET">
+        <input type="email" name="email" placeholder="Email">
+        <button type="submit" class="btn btn-primary btndj">Buscar</button>
+    </form>
+  </div>
+  <div>
+    {% if usuarios %}
+    <ul>
+        {% for usuario in usuarios %}
+        <li>{{usuario.nombre}}</li>
+        <li>{{usuario.apellido}}</li>
+        <li>{{usuario.email}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
   {% endblock %}
 
 </body>
