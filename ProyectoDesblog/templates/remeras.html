@@ -10,7 +10,7 @@
   <br>
   <h2>Cargue aquí sus productos - Remeras</h2>
   <div class="contenidoRemeras">
-    <form class="formDataRemeras" action="/ProyectoDesblog/remeras" method="POST"> {% csrf_token %}
+    <form class="formDataRemeras" action="/ProyectoDesblog/remeras/" method="POST"> {% csrf_token %}
         <input type="text" name="color" placeholder="Color">
         <input type="text" name="talle" placeholder="Talle">
         <input type="text" name="marca" placeholder="Marca">
@@ -18,7 +18,7 @@
     </form>
   </div>
   <div>
-    <form class="formDataRemeras" action="/ProyectoDesblog/buscar_remeras/" method="GET">
+    <form class="formDataRemeras" action="/ProyectoDesblog/buscar_remera/" method="GET">
         <input type="text" name="marca" placeholder="Marca">
         <button type="submit" class="btn btn-primary btndj">Buscar</button>
     </form>

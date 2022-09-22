@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from ProyectoDesblog.models import Buzos, Pantalones, Remeras
-from ProyectoDesblog.forms import form_buzos, form_pantalones, form_remeras
-from ProyectoDesblog.models import Usuario
-from ProyectoDesblog.forms import form_usuarios
+from ProyectoDesblog.models import Buzo, Pantalon, Remera, Usuario
+from ProyectoDesblog.forms import form_buzos, form_pantalones, form_remeras, form_usuarios
 # Create your views here.
 
 
@@ -14,12 +12,21 @@ def inicio(request):
     return render(request, "inicio.html")
 
 def remeras(request):
+    if request.method == "POST":
+        remera = Remera(color = request.POST['color'], talle = request.POST['talle'], marca = request.POST['marca'])
+        remera.save()
     return render(request, "remeras.html")
 
 def buzos(request):
+    if request.method == "POST":
+        buzo = Buzo(color = request.POST['color'], talle = request.POST['talle'], marca = request.POST['marca'])
+        buzo.save()
     return render(request, "buzos.html")
 
 def pantalones(request):
+    if request.method == "POST":
+        pantalon = Pantalon(color = request.POST['color'], talle = request.POST['talle'], marca = request.POST['marca'])
+        pantalon.save()
     return render(request, "pantalones.html")
 
 def api_usuarios(request):
@@ -39,7 +46,7 @@ def api_buzos(request):
         formulario = form_buzos(request.POST)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
-            buzo = Buzos(color = informacion['color'], talle = informacion['talle'], marca = informacion['marca'])
+            buzo = Buzo(color = informacion['color'], talle = informacion['talle'], marca = informacion['marca'])
             buzo.save()
             return render(request, "api_buzos.html")
     else:
@@ -51,7 +58,7 @@ def api_pantalones(request):
         formulario = form_pantalones(request.POST)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
-            pantalon = Pantalones(color = informacion['color'], talle = informacion['talle'], marca = informacion['marca'])
+            pantalon = Pantalon(color = informacion['color'], talle = informacion['talle'], marca = informacion['marca'])
             pantalon.save()
             return render(request, "api_pantalones.html")
     else:
@@ -63,7 +70,7 @@ def api_remeras(request):
         formulario = form_remeras(request.POST)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
-            remera = Remeras(color = informacion['color'], talle = informacion['talle'], marca = informacion['marca'])
+            remera = Remera(color = informacion['color'], talle = informacion['talle'], marca = informacion['marca'])
             remera.save()
             return render(request, "api_remeras.html")
     else:
@@ -83,7 +90,7 @@ def buscar_usuario(request):
 def buscar_buzo(request):
     if request.GET["marca"]:
         marca = request.GET["marca"]
-        buzos = Buzos.objects.filter(marca__icontains = marca)
+        buzos = Buzo.objects.filter(marca__icontains = marca)
         return render(request, "buzos.html", {"buzos" : buzos})
     else:
         respuesta = "No enviaste datos"
@@ -92,7 +99,7 @@ def buscar_buzo(request):
 def buscar_pantalon(request):
     if request.GET["marca"]:
         marca = request.GET["marca"]
-        pantalones = Pantalones.objects.filter(marca__icontains = marca)
+        pantalones = Pantalon.objects.filter(marca__icontains = marca)
         return render(request, "pantalones.html", {"pantalones" : pantalones})
     else:
         respuesta = "No enviaste datos"
@@ -101,7 +108,7 @@ def buscar_pantalon(request):
 def buscar_remera(request):
     if request.GET["marca"]:
         marca = request.GET["marca"]
-        remeras = Remeras.objects.filter(marca__icontains = marca)
+        remeras = Remera.objects.filter(marca__icontains = marca)
         return render(request, "remeras.html", {"remeras" : remeras})
     else:
         respuesta = "No enviaste datos"

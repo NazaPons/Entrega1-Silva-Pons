@@ -6,16 +6,16 @@ class form_usuarios(forms.Form):
     email = forms.EmailField()
 
 class form_remeras(forms.Form):
-    color: forms.CharField(max_length=40)
-    talle: forms.CharField(max_length=40)
-    marca: forms.CharField(max_length=40)
+    color = forms.CharField(max_length=40)
+    talle = forms.CharField(max_length=40)
+    marca = forms.CharField(max_length=40)
 
 class form_pantalones(forms.Form):
-    color: forms.CharField(max_length=40)
-    talle: forms.CharField(max_length=40)
-    marca: forms.CharField(max_length=40)
+    color = forms.CharField(max_length=40)
+    talle = forms.CharField(max_length=40)
+    marca = forms.CharField(max_length=40)
 
 class form_buzos(forms.Form):
-    color: forms.CharField(max_length=40)
-    talle: forms.CharField(max_length=40)
-    marca: forms.CharField(max_length=40)
+    color = forms.CharField(max_length=40)
+    talle = forms.CharField(max_length=40)
+    marca = forms.CharField(max_length=40)
